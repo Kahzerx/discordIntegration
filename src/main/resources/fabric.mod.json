@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "discord-integration",
+  "version": "${version}",
+
+  "name": "Discord integration",
+  "description": "discord to minecraft chatbridge",
+  "authors": [
+    "Kahzerx"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Kahzerx/discord-integration",
+    "sources": "https://github.com/Kahzerx/discord-integration"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/discord-integration/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "mixins": [
+    "discord-integration.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.15.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
