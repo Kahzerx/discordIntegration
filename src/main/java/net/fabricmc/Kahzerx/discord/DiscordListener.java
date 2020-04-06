@@ -7,11 +7,15 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.minecraft.network.MessageType;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.*;
+import net.minecraft.util.Formatting;
 
 import javax.annotation.Nonnull;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DiscordListener extends ListenerAdapter {
+    private static Pattern url_patt = Pattern.compile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
     private static JDA process = null;
     public static String channelId = "";
     public static String token = "";
@@ -50,7 +54,24 @@ public class DiscordListener extends ListenerAdapter {
                 if (event.getAuthor().isBot()) return;
                 String msg = "[Discord] <" + event.getAuthor().getName() + "> " + event.getMessage().getContentDisplay();
                 if (msg.length() >= 256) msg = msg.substring(0, 253) + "...";
-                server.getPlayerManager().sendToAll(new LiteralText(msg));
+
+                Matcher m = url_patt.matcher(msg);
+                Text finalMsg = new LiteralText("");
+                boolean hasUrl = false;
+                int prev = 0;
+
+                while (m.find()){
+                    hasUrl = true;
+                    Text text = new LiteralText(m.group(0)).styled((style -> {
+                        style.setColor(Formatting.GRAY)
+                                .setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, m.group(0)))
+                                .setHoverEvent(new HoverEvent(net.minecraft.text.HoverEvent.Action.SHOW_TEXT, new LiteralText("Open URL")));
+                    }));
+                    finalMsg = finalMsg.append(new LiteralText(msg.substring(prev, m.start()))).append(text);
+                    prev = m.end();
+                }
+                if (hasUrl) server.getPlayerManager().sendToAll(finalMsg.append(msg.substring(prev)));
+                else server.getPlayerManager().sendToAll(new LiteralText(msg));
             }
         }
     }
