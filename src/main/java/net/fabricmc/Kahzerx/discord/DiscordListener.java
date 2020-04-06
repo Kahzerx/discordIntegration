@@ -28,9 +28,11 @@ public class DiscordListener extends ListenerAdapter {
         channelId = c;
         try{
             chatBridge = false;
+            DiscordFileManager.updateFile(false);
             process = new JDABuilder(token).addEventListeners(new DiscordListener(server)).build();
             process.awaitReady();
             chatBridge = true;
+            DiscordFileManager.updateFile(true);
         }
         catch (Exception e){
             System.out.println(e);

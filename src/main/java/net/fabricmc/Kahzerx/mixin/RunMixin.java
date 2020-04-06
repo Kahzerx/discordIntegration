@@ -14,11 +14,13 @@ public class RunMixin {
     public void run (CallbackInfo ci){
         try {
             String[] result = DiscordFileManager.readFile();
-            if (!result[0].equals("") && !result[1].equals("")) {
-                try {
-                    DiscordListener.connect((MinecraftServer) (Object) this, result[0], result[1], "");
-                } catch (Exception e) {
-                    System.out.println(e);
+            if (!result[0].equals("") && !result[1].equals("") && !result[2].equals("")) {
+                if (result[2].equals("true")) {
+                    try {
+                        DiscordListener.connect((MinecraftServer) (Object) this, result[0], result[1], "");
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
                 }
             }
         }

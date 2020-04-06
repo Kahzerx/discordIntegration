@@ -16,14 +16,14 @@ public class DiscordFileManager {
 
     }
 
-    public static void writeFile(String token, String channelId){
+    public static void writeFile(String token, String channelId, Boolean running){
         File file = new File(name);
         if (!file.exists()){
             createFile();
         }
         try {
             FileWriter writer = new FileWriter(name);
-            writer.write("discord " + token + " " + channelId);
+            writer.write("discord " + token + " " + channelId + " " + running);
             writer.flush();
             writer.close();
         }
@@ -36,6 +36,7 @@ public class DiscordFileManager {
     public static String[] readFile(){
         String token = "";
         String channelId = "";
+        String running = "";
         try{
             FileReader fr = new FileReader(name);
             BufferedReader br = new BufferedReader(fr);
@@ -47,6 +48,7 @@ public class DiscordFileManager {
             if (result.toString().startsWith("discord")){
                 token = result.toString().split(" ")[1];
                 channelId = result.toString().split(" ")[2];
+                running = result.toString().split(" ")[3];
             }
             br.close();
             fr.close();
@@ -54,6 +56,16 @@ public class DiscordFileManager {
         catch (Exception e){
             System.out.println(e);
         }
-        return new String[] {token, channelId};
+        return new String[] {token, channelId, running};
+    }
+
+    public static void updateFile(Boolean running){
+        String[] result = readFile();
+        try{
+            DiscordFileManager.writeFile(result[0], result[1], running);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
