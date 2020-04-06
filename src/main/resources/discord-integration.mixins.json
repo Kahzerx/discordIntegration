@@ -10,7 +10,9 @@
   "server": [
     "RunMixin",
     "ServerChatListenerMixin",
-    "CommandManagerMixin"
+    "CommandManagerMixin",
+    "JoinServerMixin",
+    "LeftServerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

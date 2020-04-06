@@ -49,7 +49,7 @@ public class DiscordListener extends ListenerAdapter {
                 if (event.getMessage().getContentDisplay().equals("")) return;
                 if (event.getAuthor().isBot()) return;
                 String msg = "[Discord] <" + event.getAuthor().getName() + "> " + event.getMessage().getContentDisplay();
-                if (msg.length() >= 256) return;
+                if (msg.length() >= 256) msg = msg.substring(0, 253) + "...";
                 server.getPlayerManager().sendToAll(new LiteralText(msg));
             }
         }
