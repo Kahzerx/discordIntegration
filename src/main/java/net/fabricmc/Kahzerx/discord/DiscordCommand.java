@@ -18,7 +18,8 @@ public class DiscordCommand {
                 .then(CommandManager.literal("stop")
                         .executes(context -> f1(context.getSource())))
                 .then(CommandManager.literal("start")
-                        .executes(context -> f2(context.getSource()))));
+                        .executes(context -> f2(context.getSource())))
+                .executes(context -> f3(context.getSource())));
     }
 
     private static int f0(ServerCommandSource src, String token, String channelId){
@@ -57,12 +58,19 @@ public class DiscordCommand {
                 }
             }
             else{
-                src.sendFeedback(new LiteralText("set up a bot first please"), false);
+                src.sendFeedback(new LiteralText("Set up a bot first please"), false);
             }
         }
         else{
             src.sendFeedback(new LiteralText("Discord integration is already on"), false);
         }
+        return 1;
+    }
+
+    private static int f3(ServerCommandSource src){
+        if (DiscordListener.chatBridge) src.sendFeedback(new LiteralText("Chat bridge is currently on!"), false);
+        else src.sendFeedback(new LiteralText("Chat bridge is currently off!"), false);
+
         return 1;
     }
 
