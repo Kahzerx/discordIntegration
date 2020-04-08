@@ -1,9 +1,14 @@
 # Discord to minecraft chatbridge
 
-currently only working on 1.15.2 fabric server
+## InGame Commands
+```
+/discord (information about the chatBridge status)
+/discord setBot <token> <channelId> (to set the information into the configuration file)
+/discord start (to start the chatBridge)
+/discord stop (to stop the chatBridge)
+```
 
-```
-/discord setBot <token> <channelId>
-/discord start
-```
-to start the bot
+## Screenshots
+
+![screenshots](minecraft.png)
+![screenshots](discord.png)
