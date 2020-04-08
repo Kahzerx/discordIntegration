@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftServer.class)
-public class RunMixin {
+public class DiscordRunMixin {
     @Inject(at = @At("HEAD"), method = "run")
     public void run (CallbackInfo ci){
         try {

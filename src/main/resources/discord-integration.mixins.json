@@ -8,11 +8,11 @@
   "client": [
   ],
   "server": [
-    "RunMixin",
-    "ServerChatListenerMixin",
-    "CommandManagerMixin",
-    "JoinServerMixin",
-    "LeftServerMixin"
+    "DiscordRunMixin",
+    "DiscordServerChatListenerMixin",
+    "DiscordCommandManagerMixin",
+    "DiscordJoinServerMixin",
+    "DiscordLeftServerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerManager.class)
-public class JoinServerMixin {
+public class DiscordJoinServerMixin {
     @Inject(at = @At("RETURN"), method = "onPlayerConnect")
     public void onPlayerJoin(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci){
         if (DiscordListener.chatBridge){
