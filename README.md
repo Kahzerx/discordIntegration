@@ -1,5 +1,7 @@
 # Discord to minecraft chatbridge
 
+Fabric mod to make a minecraft - discord chatbridge
+
 ## InGame Commands
 ```
 /discord (information about the chatBridge status)
